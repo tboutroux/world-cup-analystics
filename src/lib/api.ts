@@ -66,7 +66,8 @@ export interface Competitor {
     shortDisplayName: string;
     color: string;
     alternateColor: string;
-    logo: string;
+    logo?: string;
+    logos?: { href: string }[];
   };
   score: string;
   records: any[];
@@ -94,7 +95,7 @@ export async function getScoreboardByDate(dateString: string): Promise<Scoreboar
   return res.json();
 }
 
-export async function getMatchSummary(eventId: string) {
+export async function getMatchSummary(eventId: string): Promise<MatchSummary> {
   const res = await fetch(`${ESPN_BASE_URL}/summary?event=${eventId}`, {
     next: { revalidate: 30 },
   });
@@ -102,6 +103,105 @@ export async function getMatchSummary(eventId: string) {
     throw new Error("Failed to fetch match summary");
   }
   return res.json();
+}
+
+export interface MatchSummary {
+  boxscore: {
+    teams: {
+      team: {
+        id: string;
+        displayName: string;
+        abbreviation: string;
+        logo: string;
+        color: string;
+      };
+      statistics: {
+        name: string;
+        displayValue: string;
+        label: string;
+      }[];
+    }[];
+    form: {
+      team: {
+        id: string;
+      };
+      events: {
+        id: string;
+        gameDate: string;
+        score: string;
+        gameResult: "W" | "L" | "D";
+        opponent: {
+          displayName: string;
+          abbreviation: string;
+          logo: string;
+        };
+      }[];
+    }[];
+  };
+  rosters: {
+    homeAway: "home" | "away";
+    team: {
+      id: string;
+      displayName: string;
+      abbreviation: string;
+    };
+    roster: {
+      starter: boolean;
+      jersey: string;
+      athlete: {
+        id: string;
+        displayName: string;
+        shortName: string;
+      };
+      position: {
+        name: string;
+        abbreviation: string;
+      };
+      formationPlace: string;
+    }[];
+  }[];
+  header: {
+    competitions: Competition[];
+  };
+  keyEvents: {
+    id: string;
+    type: {
+      id: string;
+      text: string;
+    };
+    text: string;
+    shortText: string;
+    clock: {
+      displayValue: string;
+      value: number;
+    };
+    team?: {
+      id: string;
+      displayName: string;
+    };
+    participants?: {
+      athlete: {
+        id: string;
+        displayName: string;
+      };
+    }[];
+  }[];
+  standings?: {
+    groups: {
+      standings: {
+        entries: {
+          team: string;
+          id: string;
+          stats: {
+            name: string;
+            displayValue: string;
+            value: number;
+          }[];
+          logo: { href: string }[];
+        }[];
+      };
+    }[];
+  };
 }
 
 export interface StandingsResponse {
