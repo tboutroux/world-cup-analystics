@@ -39,7 +39,7 @@ export default function PlayerStatsTile({ scorers, assists, totalGoals, totalMat
       activeBorder
     )}>
       {/* Left side: Selector & Global Stats */}
-      <div className="flex-1 flex flex-col justify-between border-b md:border-b-0 md:border-r border-white/10 pb-6 md:pb-0 md:pr-8">
+      <div className="flex-1 flex flex-col justify-between border-b md:border-b-0 md:border-r border-white/10 pb-6 md:pb-0 md:pr-8 w-full">
         <div>
           <div className="flex items-center gap-2 mb-6">
             <BarChart3 className={cn("w-5 h-5", activeColor)} />
@@ -70,14 +70,14 @@ export default function PlayerStatsTile({ scorers, assists, totalGoals, totalMat
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 mt-8">
-          <div className="text-center">
+        <div className="flex w-full mt-8">
+          <div className="flex-1 flex flex-col items-center justify-center">
             <div className={cn("text-3xl font-black italic tracking-tighter", activeColor)}>{totalGoals}</div>
-            <div className="text-[10px] opacity-50 uppercase font-bold">Buts</div>
+            <div className="text-[10px] opacity-50 uppercase font-bold mt-1">Buts</div>
           </div>
-          <div className="text-center">
+          <div className="flex-1 flex flex-col items-center justify-center">
             <div className={cn("text-3xl font-black italic tracking-tighter", activeColor)}>{totalMatches}</div>
-            <div className="text-[10px] opacity-50 uppercase font-bold">Matchs</div>
+            <div className="text-[10px] opacity-50 uppercase font-bold mt-1">Matchs</div>
           </div>
         </div>
       </div>
