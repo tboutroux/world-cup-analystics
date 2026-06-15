@@ -95,7 +95,7 @@ export default async function Home() {
                     </div>
                     {mainMatch.status.type.state === "in" && (
                       <div className="mt-4 bg-wc-red/10 text-wc-red px-4 py-1 rounded-full font-mono text-lg md:text-xl font-bold animate-pulse border border-wc-red/20">
-                        {mainMatch.status.displayClock}'
+                        {mainMatch.status.displayClock}
                       </div>
                     )}
                     {mainMatch.status.type.state === "pre" && (

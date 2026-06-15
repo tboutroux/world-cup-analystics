@@ -306,7 +306,7 @@ function Statistics({ summary }: { summary: any }) {
       </div>
 
       <div className="space-y-8 max-w-2xl mx-auto">
-        {statList.map(stat => {
+        {statList.map((stat: any) => {
           const s1 = getStat(0, stat.name);
           const s2 = getStat(1, stat.name);
           if (!s1 || !s2) return null;
@@ -357,13 +357,13 @@ function Lineup({ summary }: { summary: any }) {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 border-2 border-white/10 rounded-full" />
         
         <div className="absolute inset-y-0 left-0 w-1/2">
-           {homeStarters.map(player => (
+           {homeStarters.map((player: any) => (
              <PlayerPin key={player.athlete.id} player={player} side="home" />
            ))}
         </div>
 
         <div className="absolute inset-y-0 right-0 w-1/2">
-           {awayStarters.map(player => (
+           {awayStarters.map((player: any) => (
              <PlayerPin key={player.athlete.id} player={player} side="away" />
            ))}
         </div>
