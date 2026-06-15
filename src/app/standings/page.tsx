@@ -69,7 +69,7 @@ export default async function StandingsPage() {
                           "text-[10px] w-4",
                           idx < 2 ? "text-wc-green" : "opacity-30"
                         )}>{idx + 1}.</span>
-                        <img src={entry.team.logos?.[0]?.href} className="w-4 h-4 object-contain" alt="" />
+                        <img src={(entry.team as any).logo || (entry.team as any).logos?.[0]?.href} className="w-4 h-4 object-contain" alt="" />
                         <span className="truncate text-sm">{entry.team.abbreviation}</span>
                       </td>
                       <td className="py-3 text-center text-xs opacity-50">{getStat(entry, "gamesPlayed")}</td>
