@@ -51,11 +51,14 @@ export default async function Home() {
         
         {/* Main Event Tile - 2x2 */}
         {mainMatch && (
-          <div className={cn(
-            "col-span-1 md:col-span-4 lg:col-span-4 row-span-2",
-            "rounded-3xl bg-white/5 backdrop-blur-2xl border border-white/10 p-8",
-            "relative overflow-hidden group hover:border-wc-blue/50 transition-all duration-500"
-          )}>
+          <Link 
+            href={`/match/${mainMatch.id}`}
+            className={cn(
+              "col-span-1 md:col-span-4 lg:col-span-4 row-span-2",
+              "rounded-3xl bg-white/5 backdrop-blur-2xl border border-white/10 p-8",
+              "relative overflow-hidden group hover:border-wc-blue/50 transition-all duration-500 cursor-pointer"
+            )}
+          >
             <div className="absolute top-0 right-0 p-6 opacity-20 group-hover:opacity-100 transition-opacity">
               <Activity className="w-12 h-12 text-wc-blue" />
             </div>
@@ -135,7 +138,7 @@ export default async function Home() {
                 </div>
               </div>
             </div>
-          </div>
+          </Link>
         )}
 
         {/* Live Sidebar - 1x2 */}
@@ -150,7 +153,11 @@ export default async function Home() {
           </h3>
           <div className="space-y-4 overflow-y-auto flex-1 pr-2 custom-scrollbar">
             {scoreboardData.events.slice(0, 8).map((event) => (
-              <div key={event.id} className="bg-white/5 p-4 rounded-2xl border border-white/5 hover:bg-white/10 transition-all cursor-pointer group">
+              <Link 
+                href={`/match/${event.id}`}
+                key={event.id} 
+                className="block bg-white/5 p-4 rounded-2xl border border-white/5 hover:bg-white/10 transition-all cursor-pointer group"
+              >
                 <div className="flex justify-between items-center">
                   <span className="text-[10px] opacity-50 uppercase font-black">{event.status.type.shortDetail}</span>
                   {event.status.type.state === "in" && (
@@ -168,7 +175,7 @@ export default async function Home() {
                     </div>
                   ))}
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

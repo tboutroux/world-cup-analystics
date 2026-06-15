@@ -5,6 +5,7 @@ import { fetchMatchesForDate } from "@/app/calendar/actions";
 import { ScoreboardResponse, Event } from "@/lib/api";
 import { Calendar as CalendarIcon, ChevronLeft, ChevronRight, Activity } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 interface CalendarViewProps {
   initialDate: string; // YYYYMMDD
@@ -100,7 +101,11 @@ export default function CalendarView({ initialDate, initialData }: CalendarViewP
         ) : matches.length > 0 ? (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {matches.map(match => (
-              <div key={match.id} className="bg-black/20 border border-white/10 rounded-2xl p-6 hover:border-white/30 transition-all flex flex-col justify-between group">
+              <Link 
+                href={`/match/${match.id}`}
+                key={match.id} 
+                className="bg-black/20 border border-white/10 rounded-2xl p-6 hover:border-white/30 transition-all flex flex-col justify-between group cursor-pointer"
+              >
                 <div className="flex justify-between items-start mb-6">
                   <span className={cn(
                     "text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest",
@@ -145,7 +150,7 @@ export default function CalendarView({ initialDate, initialData }: CalendarViewP
                     <div className="font-black uppercase tracking-tighter truncate">{match.competitions[0].competitors[1].team.shortDisplayName}</div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         ) : (
